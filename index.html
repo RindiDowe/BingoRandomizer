@@ -1,108 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Bingo Caller</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Bingo Randomizer</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f8f8f8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
       text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
     }
-
-    h1 {
+    .word {
+      font-size: 2rem;
+      margin: 20px;
       color: #333;
     }
-
-    .word-display {
-      font-size: 2rem;
-      margin: 20px 0;
-      min-height: 50px;
-    }
-
     button {
       padding: 10px 20px;
       font-size: 1.2rem;
-      margin: 10px;
       cursor: pointer;
-      border-radius: 8px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
     }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    #callList {
-      list-style: none;
-      padding: 0;
-      max-height: 200px;
-      overflow-y: auto;
-      margin-top: 10px;
-      width: 100%;
-      max-width: 300px;
-      text-align: left;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    #callList li {
-      font-size: 1.1rem;
-      padding: 5px 10px;
-      border-bottom: 1px solid #eee;
+    .called {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>Technology Bingo Caller</h1>
-  <div class="word-display" id="wordDisplay">Click "Next Word" to begin!</div>
-  <button onclick="nextWord()">Next Word</button>
-  <button onclick="resetGame()">Reset</button>
 
-  <h2>Words Called:</h2>
-  <ul id="callList"></ul>
+  <h1>Technology Bingo Caller</h1>
+  <div class="word" id="wordDisplay">Click to Start</div>
+  <button onclick="callWord()">Call Next Word</button>
+  <div class="called" id="calledList">Called Words: None</div>
 
   <script>
     const words = [
-      'Mouse', 'Keyboard', 'Monitor', 'Headphones', 'Printer', 'Chromebook',
-      'Internet', 'Tablet', 'Login', 'Search Engine', 'Touchpad', 'Shift Key',
-      'Password', 'Desktop', 'Touch Screen', 'Google Classroom', 'Link', 'Curser',
-      'Home Page', 'Browser', 'Charger', 'Paste', 'Copy', 'Power Button', 'Select All'
+      "Mouse", "Keyboard", "Monitor", "Headphones", "Printer", "Chromebook",
+      "Internet", "Tablet", "Login", "Search Engine", "Touchpad", "Shift Key",
+      "Password", "Desktop", "Touch Screen", "Google Classroom", "Link",
+      "Curser", "Home Page", "Browser", "Charger", "Paste", "Copy",
+      "Power Button", "Select All"
     ];
 
-    let remaining = [...words];
+    let called = [];
 
-    function nextWord() {
-      if (remaining.length === 0) {
-        document.getElementById("wordDisplay").textContent = "All words have been called!";
+    function callWord() {
+      if (words.length === 0) {
+        document.getElementById('wordDisplay').innerText = "All words called!";
         return;
       }
-      const index = Math.floor(Math.random() * remaining.length);
-      const word = remaining.splice(index, 1)[0];
-      document.getElementById("wordDisplay").textContent = word;
 
-      const li = document.createElement('li');
-      li.textContent = word;
-      document.getElementById("callList").appendChild(li);
-    }
+      const randomIndex = Math.floor(Math.random() * words.length);
+      const word = words.splice(randomIndex, 1)[0];
+      called.push(word);
 
-    function resetGame() {
-      remaining = [...words];
-      document.getElementById("wordDisplay").textContent = "Click 'Next Word' to begin!";
-      document.getElementById("callList").innerHTML = '';
+      document.getElementById('wordDisplay').innerText = word;
+      document.getElementById('calledList').innerText = "Called Words: " + called.join(", ");
     }
   </script>
+
 </body>
 </html>
 
