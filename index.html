@@ -67,3 +67,113 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Bingo Caller</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .word-display {
+      font-size: 2rem;
+      margin: 20px 0;
+      min-height: 50px;
+    }
+
+    .call-list {
+      margin-top: 30px;
+      max-width: 300px;
+      text-align: left;
+    }
+
+    .call-list h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .call-list ul {
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 5px;
+    }
+
+    .call-list li {
+      padding: 5px 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Technology Bingo Caller</h1>
+  <div class="word-display" id="wordDisplay">Click "Next Word" to begin!</div>
+  <button onclick="nextWord()">Next Word</button>
+  <button onclick="resetGame()">Reset</button>
+
+  <div class="call-list">
+    <h2>Called Words:</h2>
+    <ul id="calledList"></ul>
+  </div>
+
+  <script>
+    const words = ['Mouse', 'Keyboard', 'Monitor', 'Headphones', 'Printer', 'Chromebook', 'Internet', 'Tablet', 'Login', 'Search Engine', 'Touchpad', 'Shift Key', 'Password', 'Desktop', 'Touch Screen', 'Google Classroom', 'Link', 'Curser', 'Home Page', 'Browser', 'Charger', 'Paste', 'Copy', 'Power Button', 'Select All'];
+    let remaining = [...words];
+    let calledWords = [];
+
+    function nextWord() {
+      if (remaining.length === 0) {
+        document.getElementById("wordDisplay").textContent = "All words have been called!";
+        return;
+      }
+      const index = Math.floor(Math.random() * remaining.length);
+      const word = remaining.splice(index, 1)[0];
+      calledWords.push(word);
+
+      document.getElementById("wordDisplay").textContent = word;
+
+      const li = document.createElement("li");
+      li.textContent = word;
+      document.getElementById("calledList").appendChild(li);
+    }
+
+    function resetGame() {
+      remaining = [...words];
+      calledWords = [];
+      document.getElementById("wordDisplay").textContent = "Click 'Next Word' to begin!";
+      document.getElementById("calledList").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
