@@ -20,6 +20,7 @@
       padding: 10px 20px;
       font-size: 1.2rem;
       cursor: pointer;
+      margin: 10px;
     }
     .called {
       margin-top: 30px;
@@ -29,15 +30,15 @@
   </style>
 </head>
 <body>
-<button onclick="resetCallList()" id="resetBtn">Reset</button>
 
   <h1>Technology Bingo Caller</h1>
   <div class="word" id="wordDisplay">Click to Start</div>
   <button onclick="callWord()">Call Next Word</button>
+  <button onclick="resetCallList()" id="resetBtn">Reset</button>
   <div class="called" id="calledList">Called Words: None</div>
 
   <script>
-    const words = [
+    const originalWords = [
       "Mouse", "Keyboard", "Monitor", "Headphones", "Printer", "Chromebook",
       "Internet", "Tablet", "Login", "Search Engine", "Touchpad", "Shift Key",
       "Password", "Desktop", "Touch Screen", "Google Classroom", "Link",
@@ -45,6 +46,7 @@
       "Power Button", "Select All"
     ];
 
+    let words = [...originalWords];
     let called = [];
 
     function callWord() {
@@ -60,8 +62,14 @@
       document.getElementById('wordDisplay').innerText = word;
       document.getElementById('calledList').innerText = "Called Words: " + called.join(", ");
     }
+
+    function resetCallList() {
+      words = [...originalWords];
+      called = [];
+      document.getElementById('wordDisplay').innerText = "Click to Start";
+      document.getElementById('calledList').innerText = "Called Words: None";
+    }
   </script>
 
 </body>
 </html>
-
