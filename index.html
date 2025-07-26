@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tech Bingo Caller</title>
   <style>
     body {
@@ -17,14 +17,17 @@
       padding: 20px;
       text-align: center;
     }
+
     h1 {
       color: #333;
     }
+
     .word-display {
       font-size: 2rem;
       margin: 20px 0;
       min-height: 50px;
     }
+
     button {
       padding: 10px 20px;
       font-size: 1.2rem;
@@ -35,59 +38,70 @@
       background-color: #4CAF50;
       color: white;
     }
+
     button:hover {
       background-color: #45a049;
     }
+
+    #callList {
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 300px;
+      text-align: left;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    #callList li {
+      font-size: 1.1rem;
+      padding: 5px 10px;
+      border-bottom: 1px solid #eee;
+    }
   </style>
-  #callList {
-  list-style: none;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  margin-top: 10px;
-}
-
-#callList li {
-  font-size: 1.1rem;
-  padding: 2px 0;
-  color: #555;
-}
-
 </head>
 <body>
   <h1>Technology Bingo Caller</h1>
   <div class="word-display" id="wordDisplay">Click "Next Word" to begin!</div>
-  <h2>Words Called:</h2>
-  <ul id="callList"></ul>
   <button onclick="nextWord()">Next Word</button>
   <button onclick="resetGame()">Reset</button>
 
+  <h2>Words Called:</h2>
+  <ul id="callList"></ul>
+
   <script>
-    const words = ['Mouse', 'Keyboard', 'Monitor', 'Headphones', 'Printer', 'Chromebook', 'Internet', 'Tablet', 'Login', 'Search Engine', 'Touchpad', 'Shift Key', 'Password', 'Desktop', 'Touch Screen', 'Google Classroom', 'Link', 'Curser', 'Home Page', 'Browser', 'Charger', 'Paste', 'Copy', 'Power Button', 'Select All'];
+    const words = [
+      'Mouse', 'Keyboard', 'Monitor', 'Headphones', 'Printer', 'Chromebook',
+      'Internet', 'Tablet', 'Login', 'Search Engine', 'Touchpad', 'Shift Key',
+      'Password', 'Desktop', 'Touch Screen', 'Google Classroom', 'Link', 'Curser',
+      'Home Page', 'Browser', 'Charger', 'Paste', 'Copy', 'Power Button', 'Select All'
+    ];
+
     let remaining = [...words];
 
     function nextWord() {
-  if (remaining.length === 0) {
-    document.getElementById("wordDisplay").textContent = "All words have been called!";
-    return;
-  }
-  const index = Math.floor(Math.random() * remaining.length);
-  const word = remaining.splice(index, 1)[0];
-  document.getElementById("wordDisplay").textContent = word;
+      if (remaining.length === 0) {
+        document.getElementById("wordDisplay").textContent = "All words have been called!";
+        return;
+      }
+      const index = Math.floor(Math.random() * remaining.length);
+      const word = remaining.splice(index, 1)[0];
+      document.getElementById("wordDisplay").textContent = word;
 
-  // Append to call list
-  const li = document.createElement('li');
-  li.textContent = word;
-  document.getElementById("callList").appendChild(li);
-}
+      const li = document.createElement('li');
+      li.textContent = word;
+      document.getElementById("callList").appendChild(li);
+    }
 
     function resetGame() {
-   function resetGame() {
-  remaining = [...words];
-  document.getElementById("wordDisplay").textContent = "Click 'Next Word' to begin!";
-  document.getElementById("callList").innerHTML = ''; // Clear the list
-}
-
+      remaining = [...words];
+      document.getElementById("wordDisplay").textContent = "Click 'Next Word' to begin!";
+      document.getElementById("callList").innerHTML = '';
+    }
   </script>
 </body>
 </html>
